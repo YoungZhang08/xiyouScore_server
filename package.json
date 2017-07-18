@@ -1,0 +1,27 @@
+{
+  "name": "xiyouscore-server",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "body-parser": "~1.17.1",
+    "cookie-parser": "~1.4.3",
+    "debug": "~2.6.3",
+    "express": "~4.15.2"
+  },
+  "devDependencies": {
+    "cheerio": "^1.0.0-rc.2",
+    "request": "^2.81.0"
+  },
+" repository": {
+    "type": "git",
+    "url": "https://github.com/YoungZhang08"
+  },
+  "keywords": [
+    "西邮成绩服务端"
+  ],
+  "author": "YoungZhang",
+  "license": "ISC"
+}
