@@ -47,12 +47,11 @@ router.use('/info', function(req, res) {
 router.use('/img',function (req,res) {
     var data = {
         username : req.query.username,
-        session : req.query.session
+        session : req.query.session,
+        name : req.query.name
     };
 
-    getImg(data,res,function (err,result) {
-        json(res,err,result);
-    });
+    getImg(data,res);
 });
 
 module.exports = router;
