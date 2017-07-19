@@ -69,7 +69,6 @@ var getName = function (data,callback) {
         var $ = cheerio.load(body);
         var name = $("#xhxm").text().replace("同学","");
 
-        // console.log(name);
         callback(false,name);
 
     });

@@ -5,6 +5,7 @@ var bodyParser = require('body-parser');
 
 //加载路由控制
 var users = require('./routes/users');
+var score = require('./routes/score');
 
 //创建项目实例
 var app = express();
@@ -14,6 +15,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 app.use('/users', users);   //访问路径/users
+app.use('/score',score);   //访问路径/score
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
