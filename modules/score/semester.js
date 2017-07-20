@@ -2,17 +2,17 @@ var request = require('request');
 var cheerio = require('cheerio');
 var iconv = require('iconv-lite');
 
-var getScores = function (data,callback) {
+var getSemScores = function (data,callback) {
     var options = {
         url : 'http://222.24.62.120/xscjcx.aspx?xh=' +　data.username + '&xm=' + encodeURI(data.name) + '&gnmkdm=N121605',
         method : 'GET',
-        Accept : 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+        encoding : null,
         headers : {
             Referer : 'http://222.24.62.120/xs_main.aspx?xh=' + data.username,
             Cookie : data.session
         }
     };
-    
+
     request(options,function (err,res,body) {
         if(err){
             callback("Server Error",err);
@@ -25,7 +25,7 @@ var getScores = function (data,callback) {
 
         var body = iconv.decode(body,"GB2312").toString();
         // console.log(body);
-        if(body.indexOf("你还没有进行本学期的课堂教学质量评价") != -1)
+        if(body.indexOf("你还没有进行本学期的课堂教学质量评价") !== -1)
         {
             callback("Need Assess");
             return;
@@ -35,11 +35,11 @@ var getScores = function (data,callback) {
 
         // console.log(viewstate);
 
-        saveScores(data,viewstate,callback)
+        saveSemScores(data,viewstate,callback)
     });
 }
 
-var saveScores = function (data,viewstate,callback) {
+var saveSemScores = function (data,viewstate,callback) {
     var formData = {
         __EVENTTARGET : '',
         __EVENTARGUMENT : '',
@@ -90,21 +90,21 @@ var saveScores = function (data,viewstate,callback) {
             //JQuery的遍历方法，eq()方法返回带有被选元素的指定索引号的元素。
             var td = tr.eq(i+1).find('td');
             var res = {
-                '学年' : td.eq(0).text(),
-                '学期' : td.eq(1).text(),
-                '课程名称' : td.eq(3).text(),
-                '课程性质' : td.eq(4).text(),
-                '学分' : td.eq(6).text(),
-                '绩点' : td.eq(7).text(),
-                '成绩' : td.eq(8).text(),
-                '补考成绩' : td.eq(10).text(),
-                '重修成绩' : td.eq(11).text(),
-                '开设学院' : td.eq(12).text()
+                'year' : td.eq(0).text(),
+                'semester' : td.eq(1).text(),
+                'courseTitle' : td.eq(3).text(),
+                'courseType' : td.eq(4).text(),
+                'credit' : td.eq(6).text(),
+                'gradePoint' : td.eq(7).text(),
+                'achievement' : td.eq(8).text(),
+                'makeupScore' : td.eq(10).text(),
+                'rebuiltScore' : td.eq(11).text(),
+                'institution' : td.eq(12).text()
             };
             result.push(res);
         }
         callback(false,result);
-    })
+    });
 };
 
-module.exports = getScores;
+module.exports = getSemScores;
