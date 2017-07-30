@@ -20,7 +20,7 @@ var login = function (data,callback) {
         'lbLanguage' : '',
         'hidPdrs' : '',
         'hidsc' : ''
-    }
+    };
 
     var options = {
         url : 'http://222.24.62.120/default2.aspx',

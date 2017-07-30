@@ -9,9 +9,14 @@ var makeUp = require("../modules/makeUp/makeUp");
 var json = require("../modules/users/json");
 
 //补考查询
-router.use('/makeUp',function (req,res) {
-    makeUp(function (err,result) {
-        json(res,err,result);
+router.use('/makeUp', function(req, res) {
+    var options = {
+        username: req.query.username,
+        session: req.query.session,
+        name: req.query.name
+    };
+    makeUp(options, function(err, result) {
+        json(res, err, result);
     });
 });
 
