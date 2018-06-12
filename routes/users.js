@@ -9,23 +9,24 @@ var getImg = require("../modules/users/img");
 var json = require("../modules/users/json");
 
 //验证码
-router.use('/verCode',function (req,res) {
-    verCode(function (err,result) {
+router.use('/verCode',function(req,res) {
+    verCode(function(err,result) {
         json(res,err,result);
     });
 });
 
 //登录
 router.use('/login',function (req,res) {
-
+    // console.log(res);
     var options = {
         username : req.query.username,
         password : req.query.password,
         verCode : req.query.verCode,
         session : req.query.session
     }
-
+    console.log(options);
     login(options,function (err,result) {
+        console.log(result);
         json(res,err,result);
     });
 });

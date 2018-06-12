@@ -11,7 +11,7 @@ var login = function (data,callback) {
     }
 
     var formData = {
-        '__VIEWSTATE' : 'dDwtNTE2MjI4MTQ7Oz5O9kSeYykjfN0r53Yqhqckbvd83A==',
+        '__VIEWSTATE' : 'dDwxNTMxMDk5Mzc0Ozs+lYSKnsl/mKGQ7CKkWFJpv0btUa8=',
         'txtUserName' : data.username,
         'TextBox2' : data.password,
         'txtSecretCode' : data.verCode,
@@ -33,6 +33,7 @@ var login = function (data,callback) {
     };
 
     request(options,function (err,res,body) {
+        console.log(res);
         if(err){
             callback("Server Error",err);
             return;
