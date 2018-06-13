@@ -2,6 +2,7 @@
 var express = require('express');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var session = require('express-session');
 
 //加载路由控制
 var users = require('./routes/users');
@@ -13,7 +14,12 @@ var app = express();
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(cookieParser());
+app.use(cookieParser('youngzhang'));
+app.use(session({
+  resave: true,
+  saveUninitialized: false,
+  secret: 'youngzhang' // 与cookieParse中的一致
+}));
 
 app.use('/users', users);   //访问路径/users
 app.use('/score',score);    //访问路径/score
